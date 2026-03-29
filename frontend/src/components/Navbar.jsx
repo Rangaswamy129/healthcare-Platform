@@ -15,6 +15,7 @@ useEffect(() => {
 
 
 
+
  return (
    <nav className="navbar">
       {/* Left Side */}
@@ -39,7 +40,7 @@ useEffect(() => {
       onClick={() => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
-        window.location.reload(); // refresh UI
+        window.location.reload(); 
       }}
       style={{
         background: "red",

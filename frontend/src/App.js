@@ -9,22 +9,80 @@ import VideoCall from "./pages/VideoCall";
 import AdminPanel from "./pages/AdminPanel";
 import Navbar from "./components/Navbar";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+
+        {/* Public Routes */}
+       <Route
+  path="/"
+  element={
+    <ProtectedRoute>
+      <Home />
+    </ProtectedRoute>
+  }
+/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/doctors" element={<DoctorList />} />
-        <Route path="/appointment/:id" element={<Appointment />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/video/:id" element={<VideoCall />} />
-        <Route path="/admin" element={<AdminPanel />} />
-        <Route path="/payment-success" element={<PaymentSuccess />} />
 
+        {/* Protected Routes */}
+        <Route
+          path="/doctors"
+          element={
+            <ProtectedRoute>
+              <DoctorList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/appointment/:id"
+          element={
+            <ProtectedRoute>
+              <Appointment />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/video/:id"
+          element={
+            <ProtectedRoute>
+              <VideoCall />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminPanel />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/payment-success"
+          element={
+            <ProtectedRoute>
+              <PaymentSuccess />
+            </ProtectedRoute>
+          }
+        />
 
       </Routes>
     </BrowserRouter>

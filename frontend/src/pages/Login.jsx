@@ -9,7 +9,7 @@ const navigate = useNavigate();
  useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      navigate("/"); // if already logged in, go home
+    navigate("/dashboard"); // if already logged in, go home
     }
   }, [navigate]);
 
