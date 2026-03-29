@@ -5,9 +5,9 @@ import Peer from "peerjs";
 
 const API = process.env.REACT_APP_API_URL;
 
-fetch(`${API}/api/auth/register`);
 
-const socket = io(API);
+
+// const socket = io(API);
 
 export default function VideoRoom({ roomId, inCall }) {
   const myVideo = useRef();
@@ -27,25 +27,26 @@ export default function VideoRoom({ roomId, inCall }) {
       return;
     }
 
+    const socket = io(API, {
+      transports: ["websocket"],
+    });
+
     const peer = new Peer(undefined, {
-      host: "/",
-      port: 3001,
-      path: "/peerjs",
+      host: "peerjs.com",
+      secure: true,
+      port: 443,
     });
 
     peerRef.current = peer;
 
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then((stream) => {
         localStreamRef.current = stream;
         if (myVideo.current) myVideo.current.srcObject = stream;
 
-        // Answer incoming call
         peer.on("call", (call) => {
           call.answer(stream);
           currentCallRef.current = call;
-          setDoctorOnline(true);
 
           call.on("stream", (userStream) => {
             if (userVideo.current)
@@ -53,31 +54,26 @@ export default function VideoRoom({ roomId, inCall }) {
           });
         });
 
-        // When another user joins
         socket.on("user-connected", (peerId) => {
           const call = peer.call(peerId, stream);
-          currentCallRef.current = call;
-          setDoctorOnline(true);
 
           call.on("stream", (userStream) => {
             if (userVideo.current)
               userVideo.current.srcObject = userStream;
           });
         });
-
-        socket.on("user-disconnected", () => {
-          setDoctorOnline(false);
-          if (userVideo.current) userVideo.current.srcObject = null;
-        });
-      })
-      .catch((err) => console.error("Media error:", err));
+      });
 
     peer.on("open", (id) => {
       socket.emit("join-room", roomId, id);
     });
 
-    return () => cleanup();
+    return () => {
+      socket.disconnect();
+      cleanup();
+    };
   }, [roomId, inCall]);
+
 
   
   // CONTROL FUNCTIONS
