@@ -1,7 +1,7 @@
 import { useState, useEffect,useRef } from "react";
 import { doctorsData } from "../data/doctorsData";
 
-import { loadStripe } from "@stripe/stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 import VideoRoom from "./VideoRoom";
 
 
@@ -76,7 +76,7 @@ useEffect(() => {
 
 
 
-  const [videoHistory, setVideoHistory] = useState(() => {
+  const [videoHistory] = useState(() => {
     const saved = localStorage.getItem("videoHistory");
     return saved ? JSON.parse(saved) : [];
   });
