@@ -13,14 +13,25 @@ const authRoutes = require("./routes/auth");
 const app = express();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-
-
-
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://healthcare-platform-smos.vercel.app"
+];
 
 app.use(cors({
-  origin: "https://healthcare-platform-smos.vercel.app/",
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
+
+
+
+
 app.use(express.json());
 
 app.use("/api/doctors", require("./routes/doctorRoutes"));
@@ -43,11 +54,11 @@ const { Server } = require("socket.io");
 
 const server = http.createServer(app);
 
-const io = new Server(server, {
+const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
+    origin: "https://healthcare-platform-smos.vercel.app",
+    methods: ["GET", "POST"]
+  }
 });
 
 io.on("connection", (socket) => {
