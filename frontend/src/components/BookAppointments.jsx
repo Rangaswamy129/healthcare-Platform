@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { doctorsData } from "../data/doctorsData";
+// import { doctorsData } from "../data/doctorsData";
 import { useEffect } from "react";
 
 

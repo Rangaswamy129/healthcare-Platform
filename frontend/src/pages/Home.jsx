@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { doctorsData } from "../data/doctorsData";
-import { appointmentsData } from "../data/appointmentsData";
-import { videoConsultationData } from "../data/videoConsultationData";
-import { medicalRecordsData } from "../data/medicalRecordData";
+// import { appointmentsData } from "../data/appointmentsData";
+// import { videoConsultationData } from "../data/videoConsultationData";
+// import { medicalRecordsData } from "../data/medicalRecordData";
 import BookAppointment from "../components/BookAppointments";
 import VideoConsultation from "../components/VideoConsultation";
 
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -23,7 +23,7 @@ import MedicalRecords from "./MedicalRecords";
 export default function Home() {
   const [active, setActive] = useState("");
 const [selectedDoctor, setSelectedDoctor] = useState(null);
- const [appointments, setAppointments] = useState([]);
+//  const [appointments, setAppointments] = useState([]);
 const [searchTerm, setSearchTerm] = useState("");
 const [cartDoctors, setCartDoctors] = useState(() => {
   const saved = localStorage.getItem("cartDoctors");
@@ -35,12 +35,12 @@ useEffect(() => {
 }, [cartDoctors]);
 
 
-const addToCart = (doctor) => {
-    const exists = cartDoctors.find((d) => d.id === doctor.id);
-    if (!exists) {
-      setCartDoctors([...cartDoctors, doctor]);
-    }
-  };
+// const addToCart = (doctor) => {
+//     const exists = cartDoctors.find((d) => d.id === doctor.id);
+//     if (!exists) {
+//       setCartDoctors([...cartDoctors, doctor]);
+//     }
+//   };
   
 const renderContent = () => {
   switch (active) {

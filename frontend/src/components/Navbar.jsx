@@ -69,11 +69,11 @@ useEffect(() => {
    </nav>
   );
 }
-const linkStyle = {
-  color: "white",
-  textDecoration: "none",
-  fontWeight: "bold",
-};
+// const linkStyle = {
+//   color: "white",
+//   textDecoration: "none",
+//   fontWeight: "bold",
+// };
 
 
 

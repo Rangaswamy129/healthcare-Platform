@@ -5,7 +5,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import VideoRoom from "./VideoRoom";
 
 
-  const stripePromise = loadStripe("pk_test_51T0HsHJFryXmiqadLC9xUefHKOZBlqtf53tERMvQbmOlQvltBUiINNulAHli4rfxcCDjFZYm2MKS19zX7pu6nYD400UmrfJHan");
+  // const stripePromise = loadStripe("pk_test_51T0HsHJFryXmiqadLC9xUefHKOZBlqtf53tERMvQbmOlQvltBUiINNulAHli4rfxcCDjFZYm2MKS19zX7pu6nYD400UmrfJHan");
 
 
 export default function VideoConsultation() {
