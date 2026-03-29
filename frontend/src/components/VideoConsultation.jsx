@@ -33,19 +33,21 @@ const handlePayment = async () => {
       return;
     }
 
-    const response = await fetch(
-      "http://localhost:5000/api/payments/create-checkout-session",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          doctorName: selectedDoctor.name,
-          amount: Number(selectedDoctor.fee),
-        }),
-      }
-    );
+   const API = process.env.REACT_APP_API_URL;
+
+const response = await fetch(
+  `${API}/api/payments/create-checkout-session`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      doctorName: selectedDoctor.name,
+      amount: Number(selectedDoctor.fee),
+    }),
+  }
+);
 
     const data = await response.json();
     console.log("Stripe response:", data);
