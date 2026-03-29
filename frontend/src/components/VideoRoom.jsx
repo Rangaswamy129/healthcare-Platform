@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import Peer from "peerjs";
 
-const socket = io("http://localhost:5000");
+
+const API = process.env.REACT_APP_API_URL;
+
+fetch(`${API}/api/auth/register`);
+
+const socket = io(API);
 
 export default function VideoRoom({ roomId, inCall }) {
   const myVideo = useRef();
