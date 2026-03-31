@@ -23,8 +23,8 @@ exports.createCheckoutSession = async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:3000/payment-success",
-      cancel_url: "http://localhost:3000/payment-cancel",
+      success_url: "https://healthcare-platform-smos.vercel.app/payment-success",
+      cancel_url: "https://healthcare-platform-smos.vercel.app/payment-cancel",
     });
 
    res.json({
